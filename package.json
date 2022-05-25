@@ -1,8 +1,8 @@
 {
-  "name": "captcha-micro",
+  "name": "captcha-microservice",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "gabriele partiti",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

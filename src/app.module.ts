@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { CreationModule } from './modules/creation/creation.module';
+import { ValidationModule } from './modules/validation/validation.module';
 import configuration from './config/configuration';
 import { ConfigModule } from '@nestjs/config';
 
@@ -10,6 +11,8 @@ import { ConfigModule } from '@nestjs/config';
       load: [configuration],
       isGlobal: true,
     }),
+    CreationModule,
+    ValidationModule,
   ],
   controllers: [AppController],
   providers: [],

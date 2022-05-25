@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+
   if (process.env.SWAGGER === 'true') {
     const config = new DocumentBuilder()
       .setTitle('Chapta microservice')
@@ -18,6 +18,8 @@ async function bootstrap() {
       .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
+  }
+
+  await app.listen(Number(process.env.WEB_PORT || 3000));
 }
-bootstrap();
 bootstrap().catch((err) => console.error(err));

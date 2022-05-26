@@ -19,7 +19,7 @@ async function bootstrap() {
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup('api', app, document);
   }
-  const port = Number(process.env.WEB_PORT || process.env.PORT || 3000);
-  await app.listen(port);
+  const port = Number(process.env.PORT || process.env.WEB_PORT || 3000);
+  await app.listen(port, '0.0.0.0');
 }
 bootstrap().catch((err) => console.error(err));

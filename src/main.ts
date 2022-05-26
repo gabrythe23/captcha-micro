@@ -20,6 +20,6 @@ async function bootstrap() {
     SwaggerModule.setup('api', app, document);
   }
   const port = Number(process.env.PORT || process.env.WEB_PORT || 3000);
-  await app.listen(port, '0.0.0.0');
+  await app.listen(port, process.env.HOST_NAME || '0.0.0.0');
 }
 bootstrap().catch((err) => console.error(err));

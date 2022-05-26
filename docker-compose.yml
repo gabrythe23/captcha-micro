@@ -13,6 +13,7 @@ services:
       REDIS_PASSWORD: password
       SWAGGER: 'true'
       WEB_PORT: 3000
+      HOST_NAME: localhost
     restart: always
     depends_on:
       - redis

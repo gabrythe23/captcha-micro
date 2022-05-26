@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Captcha Test</title>ì
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="styles.css"/>ì
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+</head>
+
+<body>ì
+
+<div id="app_basic" class="experiment-block">
+    <input type="text" name="valiIpt" v-model="attempt" placeholder="please enter verification code" style="width:
+    200px;">
+    <img v-bind:src="captcha">
+    <button v-on:click="validateChapta">Validate</button>
+    <button v-on:click="refresh">refresh</button>
+    <h3>{{message}}</h3>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app_basic',
+        data(){
+            return {
+                captcha: '',
+                uuid: '',
+                message: '',
+                attempt: ''
+            };
+        },
+        mounted(){
+            axios
+                .get('/create')
+                .then(response => {
+                    this.captcha = response.data.captcha;
+                    this.uuid = response.data.uuid;
+                });
+        },
+        methods: {
+            validateChapta(){
+                axios
+                    .post('/validate', {
+                        uuid: this.uuid,
+                        attempt: this.attempt
+                    })
+                    .then(response => this.message = 'VALID!')
+                    .catch(err => this.message = `INVALID FOR: ${err.message}`);
+            },
+            refresh(){
+                axios
+                    .get('/create')
+                    .then(response => {
+                        this.captcha = response.data.captcha;
+                        this.uuid = response.data.uuid;
+                    });
+            }
+        }
+    });
+</script>
+</body>
+</html>

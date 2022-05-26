@@ -15,6 +15,9 @@ $ yarn
 # render app in prod mode
 NODE_ENV=production
 
+# set hostname
+HOST_NAME=localhost
+
 # define redis configurations
 REDIS_HOST=redis.host.com
 REDIS_PORT=14840
